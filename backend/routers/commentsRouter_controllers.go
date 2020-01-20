@@ -7,7 +7,7 @@ import (
 
 func init() {
 
-    beego.GlobalControllerRouter["attendance/controllers:AttendanceController"] = append(beego.GlobalControllerRouter["attendance/controllers:AttendanceController"],
+    beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:AttendanceController"] = append(beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:AttendanceController"],
         beego.ControllerComments{
             Method: "Post",
             Router: `/`,
@@ -16,7 +16,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["attendance/controllers:AttendanceController"] = append(beego.GlobalControllerRouter["attendance/controllers:AttendanceController"],
+    beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:AttendanceController"] = append(beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:AttendanceController"],
         beego.ControllerComments{
             Method: "GetAll",
             Router: `/`,
@@ -25,7 +25,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["attendance/controllers:AttendanceController"] = append(beego.GlobalControllerRouter["attendance/controllers:AttendanceController"],
+    beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:AttendanceController"] = append(beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:AttendanceController"],
         beego.ControllerComments{
             Method: "GetOne",
             Router: `/:id`,
@@ -34,7 +34,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["attendance/controllers:AttendanceController"] = append(beego.GlobalControllerRouter["attendance/controllers:AttendanceController"],
+    beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:AttendanceController"] = append(beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:AttendanceController"],
         beego.ControllerComments{
             Method: "Put",
             Router: `/:id`,
@@ -43,7 +43,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["attendance/controllers:AttendanceController"] = append(beego.GlobalControllerRouter["attendance/controllers:AttendanceController"],
+    beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:AttendanceController"] = append(beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:AttendanceController"],
         beego.ControllerComments{
             Method: "Delete",
             Router: `/:id`,
@@ -52,7 +52,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["attendance/controllers:UserController"] = append(beego.GlobalControllerRouter["attendance/controllers:UserController"],
+    beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:UserController"] = append(beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:UserController"],
         beego.ControllerComments{
             Method: "Post",
             Router: `/`,
@@ -61,7 +61,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["attendance/controllers:UserController"] = append(beego.GlobalControllerRouter["attendance/controllers:UserController"],
+    beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:UserController"] = append(beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:UserController"],
         beego.ControllerComments{
             Method: "GetAll",
             Router: `/`,
@@ -70,7 +70,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["attendance/controllers:UserController"] = append(beego.GlobalControllerRouter["attendance/controllers:UserController"],
+    beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:UserController"] = append(beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:UserController"],
         beego.ControllerComments{
             Method: "GetOne",
             Router: `/:id`,
@@ -79,7 +79,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["attendance/controllers:UserController"] = append(beego.GlobalControllerRouter["attendance/controllers:UserController"],
+    beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:UserController"] = append(beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:UserController"],
         beego.ControllerComments{
             Method: "Put",
             Router: `/:id`,
@@ -88,7 +88,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["attendance/controllers:UserController"] = append(beego.GlobalControllerRouter["attendance/controllers:UserController"],
+    beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:UserController"] = append(beego.GlobalControllerRouter["GO_ATTENDANCE_SYSTEM/backend/controllers:UserController"],
         beego.ControllerComments{
             Method: "Delete",
             Router: `/:id`,
