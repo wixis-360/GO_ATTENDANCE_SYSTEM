@@ -21,12 +21,12 @@
     <!-- Google Font -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    
+
     <script src="qr/Blob.js"></script>
     <script src="qr/canvas-to-blob.min.js"></script>
     <script src="qr/FileSaver.js"></script>
     <script src="qr/VanillaQR.js"></script>
-    
+
     <style>
         .dataTables_filter {
             text-align: right !important;
@@ -55,7 +55,7 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="index" class="logo">
+            <a href="home" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>WIXIS</b>360</span>
                 <!-- logo for regular state and mobile devices -->
@@ -78,7 +78,7 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
                     <li>
-                        <a href="index">
+                        <a href="home">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                         </a>
                     </li>
@@ -142,13 +142,13 @@
                                         <label>Gender</label>
                                         <!-- <input name="ugender" type="text" class="form-control" id="txtgender"
                                             placeholder="Enter Gender"> -->
-                                            <div class="input-group mb-3">
+                                        <div class="input-group mb-3">
                                             <select class="custom-select" id="txtgender">
                                                 <option value="0" selected>Select Gender</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
-                                              </select>
-                                            </div>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.box-body -->
@@ -225,8 +225,8 @@
     <script src="js/fastclick.js"></script>
     <!-- AdminLTE App -->
     <script src="js/adminlte.min.js"></script>
-    
- 
+
+
     <script>
         $(function () {
             $('#tblusers').DataTable({
@@ -244,56 +244,57 @@
         });
     </script>
     <script>
-        var SERVER_URL = "http://localhost:8088";
+        var SERVER_URL = "http://77.68.22.96:8088";
         var allusersindb;
         $("#btnSave").click(function () {
-            if ($('#txtcontact').val() == ''|| $('#txtcontact').val()=='' || $('#txtgender').val()=='') {
+            if ($('#txtcontact').val() == '' || $('#txtcontact').val() == '' || $('#txtgender').val() == '') {
                 alert('Input can not be left blank');
                 return;
             }
-            if($("#txtgender").val()==0){
+            if ($("#txtgender").val() == 0) {
                 alert("Please Select a Valid Gender Option");
                 $("#txtgender").focus();
                 return;
             }
 
-            var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-            if(!regName.test($("#txtuname").val().trim())){
-                alert("Invalid User Name");
+            var regName =  /^[a-zA-Z]+ [a-zA-Z]+$/;
+            if (!regName.test($("#txtuname").val().trim())) {
+                alert('Please enter your full name (first & last name).');
                 $("#txtuname").focus();
                 return;
             }
 
             var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            if(!($("#txtemail").val().trim().match(mailformat))){
+            if (!($("#txtemail").val().trim().match(mailformat))) {
                 alert("Invalid Email");
                 $("#txtemail").focus();
                 return;
             }
 
             var phoneno = /^\d{10}$/;
-             
-            if(!($("#txtcontact").val().trim().match(phoneno))){
-                alert('Please Enter a Valid Phone Numcer !');
+
+            if (!($("#txtcontact").val().trim().match(phoneno))) {
+                alert('Please Enter a Valid Phone Number !');
                 $("#txtcontact").focus();
                 return;
             }
 
-           for(p=0;p<allusersindb.length;p++){
-               if($("#txtcontact").val().trim()==allusersindb[p].ContactNo){
-                alert('Cannot add duplicat user !');
-                $("#txtuname").focus();
-                return;
-               }
-           }
-
+            if (!(allusersindb == null)) {
+                for (p = 0; p < allusersindb.length; p++) {
+                    if ($("#txtcontact").val().trim() == allusersindb[p].ContactNo) {
+                        alert('Cannot add duplicat user !');
+                        $("#txtuname").focus();
+                        return;
+                    }
+                }
+            }
             var user = {
                 Name: $("#txtuname").val().trim(),
                 Email: $("#txtemail").val().trim(),
                 ContactNo: parseInt($("#txtcontact").val().trim()),
                 Gender: $("#txtgender").val().trim()
             };
-           
+
 
             var ajaxConfig = {
                 method: "POST",
@@ -306,13 +307,13 @@
 
             $.ajax(ajaxConfig).done(function (response, statusText, jxhr) {
                 alert("Added Successfully");
-                if(isNaN(response.Id/1)==true){
-                alert('Invalid ID for QR!');
-                return;
-            }
-                generateQR(response.Id,user.Name);
+                if (isNaN(response.Id / 1) == true) {
+                    alert('Invalid ID for QR!');
+                    return;
+                }
+                generateQR(response.Id, user.Name);
                 loadAllCustomers();
-                console.log("Response"+response.Id);
+                console.log("Response" + response.Id);
                 $('button[type="reset"]').trigger("click");
             }).fail(function (jxhr, statusText, error) {
                 alert("Unable to save the Employee, try again");
@@ -324,7 +325,7 @@
         $('button[type="reset"]').click(function () {
             $("#tblusers tbody tr").removeClass("selected-row");
             $("#txtCustomerId").attr("disabled", false);
-            $("#btnSave").attr("disabled",false);
+            $("#btnSave").attr("disabled", false);
         });
 
         $(document).ready(function () {
@@ -339,16 +340,16 @@
         }
 
 
-        function generateQR(user_id,username){
+        function generateQR(user_id, username) {
             var qr = new VanillaQR({
-            url:user_id+":wixis360",
-            width: 400,
-            height: 400,
-        });
+                url: user_id + ":wixis360",
+                width: 400,
+                height: 400,
+            });
 
-        var img = qr.toImage("png");
+            var img = qr.toImage("png");
 
-        saveAs(img.src,username+".png");
+            saveAs(img.src, username + ".png");
         }
 
 
@@ -378,18 +379,17 @@
                     $("#tblusers tbody tr").click(function () {
                         $("#tblusers tbody tr").removeClass("selected-row");
                         $(this).addClass("selected-row");
-                        var uid=($(this).find("td:first-child").text());
-                       customers.forEach(function(asd){
-                           if(asd.Id==uid){
-                            $("#txtuname").val(asd.Name);
-                            $("#txtemail").val(asd.Email);
-                            $("#txtcontact").val("0"+asd.ContactNo);
-                            $("#txtgender").val(asd.Gender);
-                           }
-                       });
-                        // $("#txtCustomerId").attr("disabled", true);
-                        // $("#txtuname").val($(this).find("td:nth-child(2)").text());
-                        $("#btnSave").attr("disabled",true);
+                        var uid = ($(this).find("td:first-child").text());
+                        customers.forEach(function (asd) {
+                            if (asd.Id == uid) {
+                                $("#txtuname").val(asd.Name);
+                                $("#txtemail").val(asd.Email);
+                                $("#txtcontact").val("0" + asd.ContactNo);
+                                $("#txtgender").val(asd.Gender);
+                            }
+                        });
+                      
+                        $("#btnSave").attr("disabled", true);
                     });
 
                     $("button.delete").off("click");
@@ -421,12 +421,12 @@
                     });
 
                     $("button.qrcode").off("click");
-                    $("button.qrcode").click(function(generate){
+                    $("button.qrcode").click(function (generate) {
                         generate.stopPropagation();
                         var row = $(this).parents("tr");
                         var userid = (row.find("td:first-child").text());
-                        var username=(row.find("td:nth-child(2)").text());
-                        generateQR(userid,username);
+                        var username = (row.find("td:nth-child(2)").text());
+                        generateQR(userid, username);
                     });
 
                 });
@@ -450,8 +450,8 @@
             });
         }
 
-        function setallusers(allusers){
-            allusersindb=allusers;
+        function setallusers(allusers) {
+            allusersindb = allusers;
         }
 
     </script>
