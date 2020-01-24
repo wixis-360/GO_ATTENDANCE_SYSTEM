@@ -21,16 +21,6 @@
     <!-- Google Font -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
-    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
-    
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-             https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
     
     <script src="qr/Blob.js"></script>
     <script src="qr/canvas-to-blob.min.js"></script>
@@ -65,9 +55,9 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="/" class="logo">
+            <a href="index" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>P</b>OS</span>
+                <span class="logo-mini"><b>WIXIS</b>360</span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><b>WIXIS</b>360</span>
             </a>
@@ -88,13 +78,13 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
                     <li>
-                        <a href="index.html">
+                        <a href="index">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                         </a>
                     </li>
 
                     <li class="active">
-                        <a href="manage-users.html">
+                        <a href="user">
                             <i class="fa fa-user"></i> <span>Manage Users</span>
                         </a>
                     </li>
@@ -150,8 +140,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Gender</label>
-                                        <input name="ugender" type="text" class="form-control" id="txtgender"
-                                            placeholder="Enter Gender">
+                                        <!-- <input name="ugender" type="text" class="form-control" id="txtgender"
+                                            placeholder="Enter Gender"> -->
+                                            <div class="input-group mb-3">
+                                            <select class="custom-select" id="txtgender">
+                                                <option value="0" selected>Select Gender</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                              </select>
+                                            </div>
                                     </div>
                                 </div>
                                 <!-- /.box-body -->
@@ -174,11 +171,13 @@
                                         <col style="width: 70px; text-align: center;">
                                         <col style="width: 120px;">
                                         <col style="width: 120px;">
+                                        <col style="width: 120px;">
                                     </colgroup>
                                     <thead>
                                         <tr>
                                             <th style="text-align: center;">UID</th>
                                             <th style="text-align: center;">Uname</th>
+                                            <th style="text-align: center;"> QR Code</th>
                                             <th style="text-align: center;"> Remove</th>
                                         </tr>
                                     </thead>
@@ -226,8 +225,8 @@
     <script src="js/fastclick.js"></script>
     <!-- AdminLTE App -->
     <script src="js/adminlte.min.js"></script>
-    <!--Firebase Configuration -->
-    <script src="js/firbaseconfig.js"></script>
+    
+ 
     <script>
         $(function () {
             $('#tblusers').DataTable({
@@ -239,31 +238,62 @@
                 'autoWidth': true,
                 language: {
                     search: "_INPUT_",
-                    searchPlaceholder: "Search Users..."
+                    searchPlaceholder: "Search  Users..."
                 }
             });
         });
     </script>
     <script>
         var SERVER_URL = "http://localhost:8088";
-
+        var allusersindb;
         $("#btnSave").click(function () {
             if ($('#txtcontact').val() == ''|| $('#txtcontact').val()=='' || $('#txtgender').val()=='') {
                 alert('Input can not be left blank');
                 return;
             }
+            if($("#txtgender").val()==0){
+                alert("Please Select a Valid Gender Option");
+                $("#txtgender").focus();
+                return;
+            }
+
+            var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+            if(!regName.test($("#txtuname").val().trim())){
+                alert("Invalid User Name");
+                $("#txtuname").focus();
+                return;
+            }
+
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if(!($("#txtemail").val().trim().match(mailformat))){
+                alert("Invalid Email");
+                $("#txtemail").focus();
+                return;
+            }
+
+            var phoneno = /^\d{10}$/;
+             
+            if(!($("#txtcontact").val().trim().match(phoneno))){
+                alert('Please Enter a Valid Phone Numcer !');
+                $("#txtcontact").focus();
+                return;
+            }
+
+           for(p=0;p<allusersindb.length;p++){
+               if($("#txtcontact").val().trim()==allusersindb[p].ContactNo){
+                alert('Cannot add duplicat user !');
+                $("#txtuname").focus();
+                return;
+               }
+           }
 
             var user = {
-				Gender: $("#txtgender").val(),
-				Name: $("#txtuname").val(),
-				ContactNo: parseInt($("#txtcontact").val()),
-				Email: $("#txtemail").val()
+                Name: $("#txtuname").val().trim(),
+                Email: $("#txtemail").val().trim(),
+                ContactNo: parseInt($("#txtcontact").val().trim()),
+                Gender: $("#txtgender").val().trim()
             };
-			
-            /*if(isNaN(user.contact/1)==true){
-                alert('Please Enter a Valid Numcer !');
-                return;
-            }*/
+           
 
             var ajaxConfig = {
                 method: "POST",
@@ -273,8 +303,13 @@
                 data: JSON.stringify(user)
             }
 
+
             $.ajax(ajaxConfig).done(function (response, statusText, jxhr) {
                 alert("Added Successfully");
+                if(isNaN(response.Id/1)==true){
+                alert('Invalid ID for QR!');
+                return;
+            }
                 generateQR(response.Id,user.Name);
                 loadAllCustomers();
                 console.log("Response"+response.Id);
@@ -289,6 +324,7 @@
         $('button[type="reset"]').click(function () {
             $("#tblusers tbody tr").removeClass("selected-row");
             $("#txtCustomerId").attr("disabled", false);
+            $("#btnSave").attr("disabled",false);
         });
 
         $(document).ready(function () {
@@ -326,13 +362,14 @@
             $("#tblusers").dataTable().fnDestroy();
             $("#tblusers tbody tr").remove();
             $.ajax(ajaxConfig).done(function (customers, statusText, jxhr) {
-
+                setallusers(customers);
                 customers.forEach(function (customer) {
 
                     var html = `<tr>
                                 <td>${customer.Id}</td>
                                 <td>${customer.Name}</td>
-                                <td><button type="button" class="btn btn-success delete">Delete</button></td>
+                                <td align="center"><button type="button" class="btn btn-primary qrcode">Download QR</button></td>
+                                <td align="center"><button type="button" class="btn btn-danger delete">Delete</button></td>
                             </tr>`;
 
                     $("#tblusers tbody").append(html);
@@ -341,11 +378,18 @@
                     $("#tblusers tbody tr").click(function () {
                         $("#tblusers tbody tr").removeClass("selected-row");
                         $(this).addClass("selected-row");
-
-                        $("#txtCustomerId").val($(this).find("td:first-child").text());
-                        $("#txtCustomerId").attr("disabled", true);
-                        $("#txtCustomerName").val($(this).find("td:nth-child(2)").text());
-
+                        var uid=($(this).find("td:first-child").text());
+                       customers.forEach(function(asd){
+                           if(asd.Id==uid){
+                            $("#txtuname").val(asd.Name);
+                            $("#txtemail").val(asd.Email);
+                            $("#txtcontact").val("0"+asd.ContactNo);
+                            $("#txtgender").val(asd.Gender);
+                           }
+                       });
+                        // $("#txtCustomerId").attr("disabled", true);
+                        // $("#txtuname").val($(this).find("td:nth-child(2)").text());
+                        $("#btnSave").attr("disabled",true);
                     });
 
                     $("button.delete").off("click");
@@ -373,8 +417,16 @@
                                 console.log(jxhr.responseText);
 
                             });
-
                         }
+                    });
+
+                    $("button.qrcode").off("click");
+                    $("button.qrcode").click(function(generate){
+                        generate.stopPropagation();
+                        var row = $(this).parents("tr");
+                        var userid = (row.find("td:first-child").text());
+                        var username=(row.find("td:nth-child(2)").text());
+                        generateQR(userid,username);
                     });
 
                 });
@@ -396,9 +448,12 @@
             }).fail(function (jxhr, statusText, error) {
                 console.log(error);
             });
-
-
         }
+
+        function setallusers(allusers){
+            allusersindb=allusers;
+        }
+
     </script>
 
 

@@ -20,11 +20,11 @@ USE `wixis360`;
 -- Dumping structure for table wixis360.attendance
 DROP TABLE IF EXISTS `attendance`;
 CREATE TABLE IF NOT EXISTS `attendance` (
-  `UID` int(11) NOT NULL DEFAULT '0',
+  `UID` int(11) NOT NULL DEFAULT 0,
   `Date` varchar(50) NOT NULL DEFAULT '',
-  `TYPE` int(11) DEFAULT NULL,
+  `TYPE` int(11) NOT NULL DEFAULT 0,
   `TIME` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`UID`)
+  PRIMARY KEY (`UID`,`Date`,`TYPE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,158 +20,212 @@
 
     <!-- Google Font -->
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+    <div class="wrapper">
 
-    <header class="main-header">
-        <!-- Logo -->
-        <a href="/" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>P</b>OS</span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>WIXIS</b>360</span>
-        </a>
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle navigation</span>
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="index" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>WIXIS</b>360</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>WIXIS</b>360</span>
             </a>
-        </nav>
-    </header>
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
 
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">MAIN NAVIGATION</li>
-                <li class="active">
-                    <a href="index.html">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                    </a>
-                </li>
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="active">
+                        <a href="index">
+                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="user.html">
-                        <i class="fa fa-user"></i> <span>Manage Users</span>
-                    </a>
-                </li>
-            </ul>
-        </section>
-        <!-- /.sidebar -->
-    </aside>
+                    <li>
+                        <a href="user">
+                            <i class="fa fa-user"></i> <span>Manage Users</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Dashboard
-                <small>Wixis360</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
-            </ol>
-        </section>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Dashboard
+                    <small>Wixis360</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Dashboard</li>
+                </ol>
+            </section>
 
-        <!-- Main content -->
-        <section class="content">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-                <div class="col-lg-4 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-aqua">
-                        <div class="inner" style="text-align: center">
-                            <h3 id="lblCustomersCount"></h3>
+            <!-- Main content -->
+            <section class="content">
+                <div class="box">
+                    <div class="box-body">
+                        <table id="tblusers" class="table table-bordered table-hover">
+                            <colgroup>
+                                <col style="width: 50px; text-align: center;">
+                                <col style="width: 120px;">
+                                <col style="width: 120px;">
+                                <col style="width: 120px;">
+                                <col style="width: 120px;">
 
-                            <p>Users</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-bag"></i>
-                        </div>
-
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">U_ID</th>
+                                    <th style="text-align: center;">User name</th>
+                                    <th style="text-align: center;">Date</th>
+                                    <th style="text-align: center;">IN</th>
+                                    <th style="text-align: center;">OUT</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
-            <!-- /.row -->
-            <!-- Main row -->
-            <div class="row">
-
-            </div>
-            <!-- /.row (main row) -->
-
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0.0
+            </section>
+            <!-- /.content -->
         </div>
-        <strong>Copyright &copy; 2019 <a href="http://Wixis360.com">Wixis360</a>.</strong> All rights
-        reserved.
-    </footer>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 1.0.0
+            </div>
+            <strong>Copyright &copy; 2019 <a href="http://Wixis360.com">Wixis360</a>.</strong> All rights
+            reserved.
+        </footer>
 
-</div>
-<!-- ./wrapper -->
+    </div>
+    <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
-<script src="js/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="js/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button);
-</script>
-<!-- Bootstrap 3.3.7 -->
-<script src="js/bootstrap.min.js"></script>
+    <!-- jQuery 3 -->
+    <script src="js/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap.min.js"></script>
 
-<!-- Slimscroll -->
-<script src="js/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="js/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="js/adminlte.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="js/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="js/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="js/adminlte.min.js"></script>
 
-<script>
 
-    $(document).ready(function () {
+     <script>
 
-        var ajaxConfig = {
-            method: "HEAD",
-            url: "http://localhost:8088/api/v1/customers",
-            async: true
-        }
+        var SERVER_URL = "http://localhost:8088";
 
-        $.ajax(ajaxConfig).done(function (response, statusText, jxhr) {
-            var customersCount = jxhr.getResponseHeader("X-Count");
-            $("#lblCustomersCount").text(customersCount);
-        }).fail(function (jxhr, statusText, error) {
+        var respond;
+        var i = -1; 
+            var x=0;
+            let qq=0;
+        $(document).ready(function () {
+
+            var ajaxConfig = {
+                method: "GET",
+                url: SERVER_URL + "/v1/user/",
+                async: true
+            }
+            var ajaxConfig2 = {
+                method: "GET",
+                url: SERVER_URL + "/v1/attendance/",
+                async: true
+            }
+            
+            $.ajax(ajaxConfig).done(function (asd, statusText, jxhr) {
+                respond = asd;
+                $.ajax(ajaxConfig2).done(function (response, statusText, jxhr) {
+                
+            for(a=0;a<response.length;a++){
+               
+                var uname="unknown user", uin, uout,uid,date;
+                
+                respond.forEach(function (data) {
+                    if (response[a].Id == data.Id) {
+                        uname = data.Name;
+                    } 
+                });
+             
+                if (response[a].TYPE == 1) {
+                    uin = response[a].TIME;
+                    uid=response[a].Id;
+                    date=response[a].Date;
+                    for (x = a; x < response.length; x++) {
+                        if (response[x].TYPE == 0 && uid==response[x].Id && date==response[x].Date) {
+                            uout = response[x].TIME;
+                            break;
+                        }
+                    }
+                }
+
+                var html = `<tr>
+                            <td>${response[a].Id}</td>
+                            <td>${uname}</td>
+                            <td>${response[a].Date}</td>
+                            <td>${uin}</td>
+                            <td>${uout}</td>
+                        </tr>`;
+
+                $("#tblusers tbody").append(html);
+            uout=null; 
+            }
+        });
+            }).fail(function (jxhr, statusText, error) {
+                console.log(error);
+            });
 
         });
-
-        var ajaxConfig2 = {
-            method: "HEAD",
-            url: "http://localhost:8088/api/v1/items",
-            async: true
+        console.log("loop="+qq);
+        function loadAllCustomers() {
+            $('#tblusers').DataTable({
+                dom: 'Pfrtip',
+                'paging': true,
+                'lengthChange': false,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true,
+                'pageLength': 5,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search Users..."
+                }
+            });
         }
-
-        $.ajax(ajaxConfig2).done(function (response, statusText, jxhr) {
-            var itemCount = jxhr.getResponseHeader("X-Count2");
-            console.log(itemCount);
-            $("#lblitemCount").text(itemCount);
-        }).fail(function (jxhr, statusText, error) {
-
-        });
-
-    });
-
-</script>
+    </script>
 
 </body>
+
 </html>
